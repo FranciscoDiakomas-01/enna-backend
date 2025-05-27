@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//enums
+enum statusType {
+  Completed
+  Cancelled
+  Pending
+  Working
+}
+
+enum priorityType {
+  High
+  Medium
+  Low
+}
+
+enum userType {
+  Admin
+  Tecnic
+}
+
+enum notificationType {
+  Task
+  Ticket
+  User
+  Other
+}
+
+//models
+
+model sector {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  description String?
+  total       Int      @default(0)
+  users       user[]
+  Ticket      Ticket[]
+}
+
+model Ticket {
+  id          Int          @id @default(autoincrement())
+  uuid        String       @unique
+  code        String       @unique
+  title       String
+  description String?
+  sectorid    Int?
+  status      statusType   @default(Pending)
+  priority    priorityType @default(Low)
+  created     DateTime     @default(now())
+  finished    DateTime
+  updated     DateTime     @updatedAt
+  Taskc       Taskc[]
+  sector      sector?      @relation(fields: [sectorid], references: [id])
+}
+
+model user {
+  id           Int            @id @default(autoincrement())
+  uuid         String         @unique
+  name         String
+  lastname     String
+  email        String         @unique
+  tel          String         @unique
+  password     String
+  bio          String?
+  type         userType       @default(Tecnic)
+  sectorid     Int?
+  completed    Int            @default(0)
+  cancelled    Int            @default(0)
+  pedding      Int            @default(0)
+  sector       sector?        @relation(fields: [sectorid], references: [id])
+  Taskc        Taskc[]
+  notification notification[]
+}
+
+model Taskc {
+  id          Int        @id @default(autoincrement())
+  uuid        String     @unique
+  ticketId    Int
+  status      statusType @default(Pending)
+  title       String
+  description String
+  owner       Int
+  created     DateTime   @default(now())
+  updated     DateTime   @updatedAt
+  finished    DateTime?
+  user        user       @relation(fields: [owner], references: [id])
+  tikect      Ticket     @relation(fields: [ticketId], references: [id])
+}
+
+model notification {
+  id       Int              @id @default(autoincrement())
+  uuid     String           @unique
+  owner    Int
+  read     Boolean          @default(false)
+  text     String
+  deeplink String?
+  message  String
+  type     notificationType @default(Other)
+  created  DateTime         @default(now())
+  updated  DateTime         @updatedAt
+  user     user             @relation(fields: [owner], references: [id])
+}

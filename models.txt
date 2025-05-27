@@ -1,0 +1,89 @@
+
+
+
+client 
+	id
+	nome
+	email / telefone
+	adress
+	empresa
+	created
+	updated
+
+Tecnico
+
+	id
+	name
+	lastname
+	telefone
+	area
+	password
+	email
+	created
+	updated
+	image
+
+Ticket
+	id
+	title
+	code
+	client
+	date_start
+	date_end
+	status (open , closed , cancelled , peding)
+	priority (higth , medium , low)
+	category 
+	files []
+	created 
+	updated
+
+
+task 
+	id
+	ticket
+	tecnic
+	date_start
+	date_end
+	hour_start
+	hour_end
+	time 
+	status ( pending , cancled , completed ),
+	
+
+resume
+	id
+	tecnic
+	time (week , month , year)
+	tasks
+	time
+	description
+	created
+
+
+user 
+	id
+	email
+	password
+	type (admin | coord)
+	created
+	updated
+
+
+comments 
+
+	id
+	ticket_id
+	task_id
+	user_id
+	message
+	created
+	updated
+
+
+tikect_category 
+	id
+	title
+	desscrition
+	created
+	updated
+	
