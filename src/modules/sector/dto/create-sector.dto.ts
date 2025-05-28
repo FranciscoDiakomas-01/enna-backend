@@ -7,7 +7,7 @@ export class CreateSectorDto {
   @MinLength(2, {
     message: "O título deve conter pelo menos dois caracteres",
   })
-  @MaxLength(10, { message: "O título deve conter pelo menos dois caracteres" })
+  @MaxLength(50, { message: "O título deve conter pelo menos 50 caracteres" })
   @IsNotEmpty()
   title: string;
 

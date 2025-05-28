@@ -143,7 +143,6 @@ exports.Prisma.TicketScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   name: 'name',
   lastname: 'lastname',
   email: 'email',
@@ -154,7 +153,9 @@ exports.Prisma.UserScalarFieldEnum = {
   sectorid: 'sectorid',
   completed: 'completed',
   cancelled: 'cancelled',
-  pedding: 'pedding'
+  pedding: 'pedding',
+  created: 'created',
+  updated: 'updated'
 };
 
 exports.Prisma.TaskcScalarFieldEnum = {

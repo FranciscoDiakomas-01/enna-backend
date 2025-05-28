@@ -64,7 +64,6 @@ model Ticket {
 
 model user {
   id Int @id @default(autoincrement())
-  uuid String @unique
   name String 
   lastname String
   email String @unique
@@ -79,6 +78,8 @@ model user {
   sector sector?  @relation(fields: [sectorid] , references: [id] , onDelete: Cascade)
   Taskc Taskc[]
   notification notification[]
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }
 
 model Taskc{

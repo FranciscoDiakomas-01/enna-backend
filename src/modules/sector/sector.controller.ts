@@ -3,27 +3,42 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   HttpException,
   HttpStatus,
+  Query,
+  Put,
 } from "@nestjs/common";
 import { SectorService } from "./sector.service";
 import { CreateSectorDto } from "./dto/create-sector.dto";
+import { UpdateSectorDTO } from "./dto/update-sector.dto";
 
 @Controller("sector")
 export class SectorController {
   constructor(private readonly sectorService: SectorService) {}
-
   @Get()
-  public async getAllSectors() {
-    const sectors = await this.sectorService.getAll();
+  public async getAllSectors(@Query("search") search: string = "none") {
+    if (search == "none") {
+      const sectors = await this.sectorService.getAll();
+      return {
+        data: sectors,
+      };
+    } else {
+      const sectors = await this.sectorService.getByPatter(search);
+      return {
+        data: sectors,
+        search,
+      };
+    }
+  }
+  @Get("/count")
+  public async getCount() {
+    const sectors = await this.sectorService.count();
     return {
       data: sectors,
     };
   }
-
   @Post()
   public async createSecor(@Body() sector: CreateSectorDto) {
     const sectorID = await this.sectorService.create(sector);
@@ -36,7 +51,6 @@ export class SectorController {
       };
     }
   }
-
   @Get("/:id")
   public async getSectorById(@Param("id") id: string) {
     const sectors = await this.sectorService.getById(id);
@@ -47,15 +61,27 @@ export class SectorController {
       data: sectors,
     };
   }
-
   @Delete("/:id")
-  public async deleteByID(@Param("id") id: string) {
+  public async deleteSectorByID(@Param("id") id: string) {
     const sectors = await this.sectorService.deleteById(id);
     if (!sectors) {
       throw new HttpException("Setor não encotrado", HttpStatus.NOT_FOUND);
     }
     return {
-      deleted : true
+      deleted: true,
+    };
+  }
+  @Put()
+  public async updateSectorById(@Body() sector: UpdateSectorDTO) {
+    const sectorUpdate = await this.sectorService.update(sector);
+    if (!sectorUpdate) {
+      throw new HttpException(
+        "Erro ao actualizar o sector",
+        HttpStatus.BAD_REQUEST
+      );
+    }
+    return {
+      updated: true,
     };
   }
 }

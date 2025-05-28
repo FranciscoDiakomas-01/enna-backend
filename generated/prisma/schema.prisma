@@ -58,12 +58,11 @@ model Ticket {
   finished    DateTime
   updated     DateTime     @updatedAt
   Taskc       Taskc[]
-  sector      sector?      @relation(fields: [sectorid], references: [id])
+  sector      sector?      @relation(fields: [sectorid], references: [id], onDelete: Cascade)
 }
 
 model user {
   id           Int            @id @default(autoincrement())
-  uuid         String         @unique
   name         String
   lastname     String
   email        String         @unique
@@ -75,9 +74,11 @@ model user {
   completed    Int            @default(0)
   cancelled    Int            @default(0)
   pedding      Int            @default(0)
-  sector       sector?        @relation(fields: [sectorid], references: [id])
+  sector       sector?        @relation(fields: [sectorid], references: [id], onDelete: Cascade)
   Taskc        Taskc[]
   notification notification[]
+  created      DateTime       @default(now())
+  updated      DateTime       @updatedAt
 }
 
 model Taskc {
@@ -91,8 +92,8 @@ model Taskc {
   created     DateTime   @default(now())
   updated     DateTime   @updatedAt
   finished    DateTime?
-  user        user       @relation(fields: [owner], references: [id])
-  tikect      Ticket     @relation(fields: [ticketId], references: [id])
+  user        user       @relation(fields: [owner], references: [id], onDelete: Cascade)
+  tikect      Ticket     @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }
 
 model notification {
@@ -106,5 +107,5 @@ model notification {
   type     notificationType @default(Other)
   created  DateTime         @default(now())
   updated  DateTime         @updatedAt
-  user     user             @relation(fields: [owner], references: [id])
+  user     user             @relation(fields: [owner], references: [id], onDelete: Cascade)
 }

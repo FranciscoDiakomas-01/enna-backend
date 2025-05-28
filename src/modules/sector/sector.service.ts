@@ -103,10 +103,71 @@ export class SectorService {
           id: true,
         },
         where: {
-          id : Number(id)
+          id: Number(id),
         },
       })) as ISector;
       return Sector?.id ? true : false;
+    } catch (error) {
+      return false;
+    }
+  }
+  public async getByPatter(text: string) {
+    try {
+      const sectors = await this.databaseService.sector.findMany({
+        select: {
+          id: true,
+          title: true,
+          description: true,
+          total: true,
+        },
+        where: {
+          OR: [
+            {
+              title: {
+                contains: text,
+                mode: "insensitive",
+              },
+            },
+            {
+              description: {
+                contains: text,
+                mode: "insensitive",
+              },
+            },
+          ],
+        },
+      });
+      return sectors as ISector[];
+    } catch (error) {
+      return [] as ISector[];
+    }
+  }
+  public async incrementTotal(id: number | string) {
+    try {
+      const Sector = await this.databaseService.sector.findFirst({
+        select: {
+          id: true,
+          total: true,
+        },
+        take: 1,
+        where: {
+          id: Number(id),
+        },
+      });
+      if (Sector?.id) {
+        const totalUserPerSector = Sector.total;
+        await this.databaseService.sector.update({
+          data: {
+            total: Number(totalUserPerSector) + 1,
+          },
+          where: {
+            id: Number(id),
+          },
+        });
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       return false;
     }
