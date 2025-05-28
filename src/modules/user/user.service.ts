@@ -6,6 +6,7 @@ import IUser from "./entities/user.entity";
 import { ConfigService } from "@nestjs/config";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDTO } from "./dto/update-user.dto";
+import DecriptPassword from "src/utils/deciptPassowrd";
 @Injectable()
 export class UserService {
   constructor(
@@ -172,18 +173,18 @@ export class UserService {
       return false;
     }
   }
-
-  public async getUserByEmailPassowrdTelefone(
+  public async updateUserCredentialUseCase(
     email: string,
     password: string,
     telefone: string,
-    id: number | string
+    id: number | string,
+    newUser: { email: string; password: string; tel: string }
   ) {
     try {
       const User = await this.databaseService.user.findFirst({
         select: {
           id: true,
-          password : true
+          password: true,
         },
         where: {
           AND: [
@@ -207,8 +208,69 @@ export class UserService {
       });
       if (!User || !User?.password || !User?.id) {
         return { message: "not found" };
+      } else {
+        const isUserOwnerAcount = await this.isUserPassword(password, id);
+        if (isUserOwnerAcount.message == "can update") {
+          const isUserUpdated = await this.updateUserCredentials(
+            newUser.email,
+            newUser.password,
+            newUser.tel,
+            id
+          );
+          return isUserOwnerAcount
+            ? { updated: true }
+            : { message: "Erro ao actualizar o perfil" };
+        } else {
+          return { message: isUserOwnerAcount.message };
+        }
       }
-
+    } catch (error) {
+      return { message: "not found" };
+    }
+  }
+  public async updateUserCredentials(
+    email: string,
+    password: string,
+    tel: string,
+    userId: number | string
+  ) {
+    const encriptedPassord = EncriptPassWord(password);
+    try {
+      const updatedUser = await this.databaseService.user.update({
+        data: {
+          tel: tel,
+          email,
+          password: encriptedPassord,
+        },
+        where: {
+          id: Number(userId),
+        },
+        select: {
+          id: true,
+        },
+      });
+      return updatedUser && updatedUser?.id ? true : false;
+    } catch (error) {
+      return false;
+    }
+  }
+  public async isUserPassword(password: string, userId: number | string) {
+    try {
+      const User = await this.databaseService.user.findFirst({
+        select: {
+          password: true,
+          id: true,
+        },
+        where: {
+          id: Number(userId),
+        },
+      });
+      if (!User || !User?.id || !User?.password) {
+        return { message: "not found" };
+      }
+      return DecriptPassword(User.password) == password
+        ? { message: "can update" }
+        : { message: "credentials invalid" };
     } catch (error) {
       return { message: "not found" };
     }
