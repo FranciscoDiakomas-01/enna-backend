@@ -5,7 +5,7 @@ import EncriptPassWord from "src/utils/encriptPassowrd";
 import IUser from "./entities/user.entity";
 import { ConfigService } from "@nestjs/config";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDTO } from "./dto/update-user.dto";
+import { UpdateUserDTO, UpdateUserDTOCredentials } from "./dto/update-user.dto";
 import DecriptPassword from "src/utils/deciptPassowrd";
 @Injectable()
 export class UserService {
@@ -63,6 +63,85 @@ export class UserService {
       };
     }
   }
+  public async getAllPatter(page: number, pattern: string) {
+    const total = await this.count();
+    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    try {
+      const users = await this.databaseService.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          lastname: true,
+          bio: true,
+          cancelled: true,
+          completed: true,
+          pedding: true,
+          email: true,
+          updated: true,
+          sectorid: true,
+          tel: true,
+          type: true,
+          sector: {
+            select: {
+              title: true,
+            },
+          },
+        },
+        skip: (page - 1) * serverConstants.paginationLimit,
+        take: serverConstants.paginationLimit,
+        orderBy: { created: "desc" },
+        where: {
+          type: {
+            not: "Admin",
+          },
+          OR: [
+            {
+              name: {
+                contains: pattern,
+                mode: "insensitive",
+              },
+            },
+            {
+              lastname: {
+                contains: pattern,
+                mode: "insensitive",
+              },
+            },
+            {
+              email: {
+                contains: pattern,
+                mode: "insensitive",
+              },
+            },
+            {
+              bio: {
+                contains: pattern,
+                mode: "insensitive",
+              },
+            },
+          ],
+        },
+      });
+      return {
+        data: users,
+        lastPage,
+        total: total.value,
+        limit: serverConstants.paginationLimit,
+        page,
+        filter : pattern
+      };
+    } catch (error) {
+      return {
+        data: [],
+        lastPage,
+        total: total.value,
+        limit: serverConstants.paginationLimit,
+        page,
+        filter: pattern,
+      };
+    }
+  }
+
   public async getById(id: number | string) {
     try {
       const User = await this.databaseService.user.findFirst({
@@ -173,13 +252,7 @@ export class UserService {
       return false;
     }
   }
-  public async updateUserCredentialUseCase(
-    email: string,
-    password: string,
-    telefone: string,
-    id: number | string,
-    newUser: { email: string; password: string; tel: string }
-  ) {
+  public async updateUserCredentialUseCase(UserData: UpdateUserDTOCredentials) {
     try {
       const User = await this.databaseService.user.findFirst({
         select: {
@@ -190,17 +263,17 @@ export class UserService {
           AND: [
             {
               email: {
-                equals: email,
+                equals: UserData.oldEmail,
               },
             },
             {
               tel: {
-                equals: telefone,
+                equals: UserData.oldTelefone,
               },
             },
             {
               id: {
-                equals: Number(id),
+                equals: Number(UserData.id),
               },
             },
           ],
@@ -209,16 +282,19 @@ export class UserService {
       if (!User || !User?.password || !User?.id) {
         return { message: "not found" };
       } else {
-        const isUserOwnerAcount = await this.isUserPassword(password, id);
+        const isUserOwnerAcount = await this.isUserPassword(
+          UserData.oldPassword,
+          UserData.id
+        );
         if (isUserOwnerAcount.message == "can update") {
           const isUserUpdated = await this.updateUserCredentials(
-            newUser.email,
-            newUser.password,
-            newUser.tel,
-            id
+            UserData.currentEmail,
+            UserData.currentPassowrd,
+            UserData.currentTelefone,
+            UserData.id
           );
-          return isUserOwnerAcount
-            ? { updated: true }
+          return isUserUpdated
+            ? { updated: true, message: "updated" }
             : { message: "Erro ao actualizar o perfil" };
         } else {
           return { message: isUserOwnerAcount.message };

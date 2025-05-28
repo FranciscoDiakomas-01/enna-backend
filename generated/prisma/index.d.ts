@@ -2548,8 +2548,6 @@ export namespace Prisma {
 
   export type TicketMinAggregateOutputType = {
     id: number | null
-    uuid: string | null
-    code: string | null
     title: string | null
     description: string | null
     sectorid: number | null
@@ -2562,8 +2560,6 @@ export namespace Prisma {
 
   export type TicketMaxAggregateOutputType = {
     id: number | null
-    uuid: string | null
-    code: string | null
     title: string | null
     description: string | null
     sectorid: number | null
@@ -2576,8 +2572,6 @@ export namespace Prisma {
 
   export type TicketCountAggregateOutputType = {
     id: number
-    uuid: number
-    code: number
     title: number
     description: number
     sectorid: number
@@ -2602,8 +2596,6 @@ export namespace Prisma {
 
   export type TicketMinAggregateInputType = {
     id?: true
-    uuid?: true
-    code?: true
     title?: true
     description?: true
     sectorid?: true
@@ -2616,8 +2608,6 @@ export namespace Prisma {
 
   export type TicketMaxAggregateInputType = {
     id?: true
-    uuid?: true
-    code?: true
     title?: true
     description?: true
     sectorid?: true
@@ -2630,8 +2620,6 @@ export namespace Prisma {
 
   export type TicketCountAggregateInputType = {
     id?: true
-    uuid?: true
-    code?: true
     title?: true
     description?: true
     sectorid?: true
@@ -2731,8 +2719,6 @@ export namespace Prisma {
 
   export type TicketGroupByOutputType = {
     id: number
-    uuid: string
-    code: string
     title: string
     description: string | null
     sectorid: number | null
@@ -2764,8 +2750,6 @@ export namespace Prisma {
 
   export type TicketSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
-    code?: boolean
     title?: boolean
     description?: boolean
     sectorid?: boolean
@@ -2781,8 +2765,6 @@ export namespace Prisma {
 
   export type TicketSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
-    code?: boolean
     title?: boolean
     description?: boolean
     sectorid?: boolean
@@ -2796,8 +2778,6 @@ export namespace Prisma {
 
   export type TicketSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
-    code?: boolean
     title?: boolean
     description?: boolean
     sectorid?: boolean
@@ -2811,8 +2791,6 @@ export namespace Prisma {
 
   export type TicketSelectScalar = {
     id?: boolean
-    uuid?: boolean
-    code?: boolean
     title?: boolean
     description?: boolean
     sectorid?: boolean
@@ -2823,7 +2801,7 @@ export namespace Prisma {
     updated?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "code" | "title" | "description" | "sectorid" | "status" | "priority" | "created" | "finished" | "updated", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "sectorid" | "status" | "priority" | "created" | "finished" | "updated", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Taskc?: boolean | Ticket$TaskcArgs<ExtArgs>
     sector?: boolean | Ticket$sectorArgs<ExtArgs>
@@ -2844,8 +2822,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      uuid: string
-      code: string
       title: string
       description: string | null
       sectorid: number | null
@@ -3280,8 +3256,6 @@ export namespace Prisma {
    */
   interface TicketFieldRefs {
     readonly id: FieldRef<"Ticket", 'Int'>
-    readonly uuid: FieldRef<"Ticket", 'String'>
-    readonly code: FieldRef<"Ticket", 'String'>
     readonly title: FieldRef<"Ticket", 'String'>
     readonly description: FieldRef<"Ticket", 'String'>
     readonly sectorid: FieldRef<"Ticket", 'Int'>
@@ -5075,7 +5049,6 @@ export namespace Prisma {
 
   export type TaskcMinAggregateOutputType = {
     id: number | null
-    uuid: string | null
     ticketId: number | null
     status: $Enums.statusType | null
     title: string | null
@@ -5088,7 +5061,6 @@ export namespace Prisma {
 
   export type TaskcMaxAggregateOutputType = {
     id: number | null
-    uuid: string | null
     ticketId: number | null
     status: $Enums.statusType | null
     title: string | null
@@ -5101,7 +5073,6 @@ export namespace Prisma {
 
   export type TaskcCountAggregateOutputType = {
     id: number
-    uuid: number
     ticketId: number
     status: number
     title: number
@@ -5128,7 +5099,6 @@ export namespace Prisma {
 
   export type TaskcMinAggregateInputType = {
     id?: true
-    uuid?: true
     ticketId?: true
     status?: true
     title?: true
@@ -5141,7 +5111,6 @@ export namespace Prisma {
 
   export type TaskcMaxAggregateInputType = {
     id?: true
-    uuid?: true
     ticketId?: true
     status?: true
     title?: true
@@ -5154,7 +5123,6 @@ export namespace Prisma {
 
   export type TaskcCountAggregateInputType = {
     id?: true
-    uuid?: true
     ticketId?: true
     status?: true
     title?: true
@@ -5254,7 +5222,6 @@ export namespace Prisma {
 
   export type TaskcGroupByOutputType = {
     id: number
-    uuid: string
     ticketId: number
     status: $Enums.statusType
     title: string
@@ -5286,7 +5253,6 @@ export namespace Prisma {
 
   export type TaskcSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     ticketId?: boolean
     status?: boolean
     title?: boolean
@@ -5301,7 +5267,6 @@ export namespace Prisma {
 
   export type TaskcSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     ticketId?: boolean
     status?: boolean
     title?: boolean
@@ -5316,7 +5281,6 @@ export namespace Prisma {
 
   export type TaskcSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     ticketId?: boolean
     status?: boolean
     title?: boolean
@@ -5331,7 +5295,6 @@ export namespace Prisma {
 
   export type TaskcSelectScalar = {
     id?: boolean
-    uuid?: boolean
     ticketId?: boolean
     status?: boolean
     title?: boolean
@@ -5342,7 +5305,7 @@ export namespace Prisma {
     finished?: boolean
   }
 
-  export type TaskcOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "ticketId" | "status" | "title" | "description" | "owner" | "created" | "updated" | "finished", ExtArgs["result"]["taskc"]>
+  export type TaskcOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketId" | "status" | "title" | "description" | "owner" | "created" | "updated" | "finished", ExtArgs["result"]["taskc"]>
   export type TaskcInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
     tikect?: boolean | TicketDefaultArgs<ExtArgs>
@@ -5364,7 +5327,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      uuid: string
       ticketId: number
       status: $Enums.statusType
       title: string
@@ -5799,7 +5761,6 @@ export namespace Prisma {
    */
   interface TaskcFieldRefs {
     readonly id: FieldRef<"Taskc", 'Int'>
-    readonly uuid: FieldRef<"Taskc", 'String'>
     readonly ticketId: FieldRef<"Taskc", 'Int'>
     readonly status: FieldRef<"Taskc", 'statusType'>
     readonly title: FieldRef<"Taskc", 'String'>
@@ -7409,8 +7370,6 @@ export namespace Prisma {
 
   export const TicketScalarFieldEnum: {
     id: 'id',
-    uuid: 'uuid',
-    code: 'code',
     title: 'title',
     description: 'description',
     sectorid: 'sectorid',
@@ -7446,7 +7405,6 @@ export namespace Prisma {
 
   export const TaskcScalarFieldEnum: {
     id: 'id',
-    uuid: 'uuid',
     ticketId: 'ticketId',
     status: 'status',
     title: 'title',
@@ -7687,8 +7645,6 @@ export namespace Prisma {
     OR?: TicketWhereInput[]
     NOT?: TicketWhereInput | TicketWhereInput[]
     id?: IntFilter<"Ticket"> | number
-    uuid?: StringFilter<"Ticket"> | string
-    code?: StringFilter<"Ticket"> | string
     title?: StringFilter<"Ticket"> | string
     description?: StringNullableFilter<"Ticket"> | string | null
     sectorid?: IntNullableFilter<"Ticket"> | number | null
@@ -7703,8 +7659,6 @@ export namespace Prisma {
 
   export type TicketOrderByWithRelationInput = {
     id?: SortOrder
-    uuid?: SortOrder
-    code?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     sectorid?: SortOrderInput | SortOrder
@@ -7719,8 +7673,6 @@ export namespace Prisma {
 
   export type TicketWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    uuid?: string
-    code?: string
     AND?: TicketWhereInput | TicketWhereInput[]
     OR?: TicketWhereInput[]
     NOT?: TicketWhereInput | TicketWhereInput[]
@@ -7734,12 +7686,10 @@ export namespace Prisma {
     updated?: DateTimeFilter<"Ticket"> | Date | string
     Taskc?: TaskcListRelationFilter
     sector?: XOR<SectorNullableScalarRelationFilter, sectorWhereInput> | null
-  }, "id" | "uuid" | "code">
+  }, "id">
 
   export type TicketOrderByWithAggregationInput = {
     id?: SortOrder
-    uuid?: SortOrder
-    code?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
     sectorid?: SortOrderInput | SortOrder
@@ -7760,8 +7710,6 @@ export namespace Prisma {
     OR?: TicketScalarWhereWithAggregatesInput[]
     NOT?: TicketScalarWhereWithAggregatesInput | TicketScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Ticket"> | number
-    uuid?: StringWithAggregatesFilter<"Ticket"> | string
-    code?: StringWithAggregatesFilter<"Ticket"> | string
     title?: StringWithAggregatesFilter<"Ticket"> | string
     description?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
     sectorid?: IntNullableWithAggregatesFilter<"Ticket"> | number | null
@@ -7885,7 +7833,6 @@ export namespace Prisma {
     OR?: TaskcWhereInput[]
     NOT?: TaskcWhereInput | TaskcWhereInput[]
     id?: IntFilter<"Taskc"> | number
-    uuid?: StringFilter<"Taskc"> | string
     ticketId?: IntFilter<"Taskc"> | number
     status?: EnumstatusTypeFilter<"Taskc"> | $Enums.statusType
     title?: StringFilter<"Taskc"> | string
@@ -7900,7 +7847,6 @@ export namespace Prisma {
 
   export type TaskcOrderByWithRelationInput = {
     id?: SortOrder
-    uuid?: SortOrder
     ticketId?: SortOrder
     status?: SortOrder
     title?: SortOrder
@@ -7915,7 +7861,6 @@ export namespace Prisma {
 
   export type TaskcWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    uuid?: string
     AND?: TaskcWhereInput | TaskcWhereInput[]
     OR?: TaskcWhereInput[]
     NOT?: TaskcWhereInput | TaskcWhereInput[]
@@ -7929,11 +7874,10 @@ export namespace Prisma {
     finished?: DateTimeNullableFilter<"Taskc"> | Date | string | null
     user?: XOR<UserScalarRelationFilter, userWhereInput>
     tikect?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-  }, "id" | "uuid">
+  }, "id">
 
   export type TaskcOrderByWithAggregationInput = {
     id?: SortOrder
-    uuid?: SortOrder
     ticketId?: SortOrder
     status?: SortOrder
     title?: SortOrder
@@ -7954,7 +7898,6 @@ export namespace Prisma {
     OR?: TaskcScalarWhereWithAggregatesInput[]
     NOT?: TaskcScalarWhereWithAggregatesInput | TaskcScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Taskc"> | number
-    uuid?: StringWithAggregatesFilter<"Taskc"> | string
     ticketId?: IntWithAggregatesFilter<"Taskc"> | number
     status?: EnumstatusTypeWithAggregatesFilter<"Taskc"> | $Enums.statusType
     title?: StringWithAggregatesFilter<"Taskc"> | string
@@ -8102,8 +8045,6 @@ export namespace Prisma {
   }
 
   export type TicketCreateInput = {
-    uuid: string
-    code: string
     title: string
     description?: string | null
     status?: $Enums.statusType
@@ -8117,8 +8058,6 @@ export namespace Prisma {
 
   export type TicketUncheckedCreateInput = {
     id?: number
-    uuid: string
-    code: string
     title: string
     description?: string | null
     sectorid?: number | null
@@ -8131,8 +8070,6 @@ export namespace Prisma {
   }
 
   export type TicketUpdateInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -8146,8 +8083,6 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
@@ -8161,8 +8096,6 @@ export namespace Prisma {
 
   export type TicketCreateManyInput = {
     id?: number
-    uuid: string
-    code: string
     title: string
     description?: string | null
     sectorid?: number | null
@@ -8174,8 +8107,6 @@ export namespace Prisma {
   }
 
   export type TicketUpdateManyMutationInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -8187,8 +8118,6 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
@@ -8323,7 +8252,6 @@ export namespace Prisma {
   }
 
   export type TaskcCreateInput = {
-    uuid: string
     status?: $Enums.statusType
     title: string
     description: string
@@ -8336,7 +8264,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedCreateInput = {
     id?: number
-    uuid: string
     ticketId: number
     status?: $Enums.statusType
     title: string
@@ -8348,7 +8275,6 @@ export namespace Prisma {
   }
 
   export type TaskcUpdateInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -8361,7 +8287,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     ticketId?: IntFieldUpdateOperationsInput | number
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
@@ -8374,7 +8299,6 @@ export namespace Prisma {
 
   export type TaskcCreateManyInput = {
     id?: number
-    uuid: string
     ticketId: number
     status?: $Enums.statusType
     title: string
@@ -8386,7 +8310,6 @@ export namespace Prisma {
   }
 
   export type TaskcUpdateManyMutationInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -8397,7 +8320,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     ticketId?: IntFieldUpdateOperationsInput | number
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
@@ -8697,8 +8619,6 @@ export namespace Prisma {
 
   export type TicketCountOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
-    code?: SortOrder
     title?: SortOrder
     description?: SortOrder
     sectorid?: SortOrder
@@ -8716,8 +8636,6 @@ export namespace Prisma {
 
   export type TicketMaxOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
-    code?: SortOrder
     title?: SortOrder
     description?: SortOrder
     sectorid?: SortOrder
@@ -8730,8 +8648,6 @@ export namespace Prisma {
 
   export type TicketMinOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
-    code?: SortOrder
     title?: SortOrder
     description?: SortOrder
     sectorid?: SortOrder
@@ -8914,7 +8830,6 @@ export namespace Prisma {
 
   export type TaskcCountOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     ticketId?: SortOrder
     status?: SortOrder
     title?: SortOrder
@@ -8933,7 +8848,6 @@ export namespace Prisma {
 
   export type TaskcMaxOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     ticketId?: SortOrder
     status?: SortOrder
     title?: SortOrder
@@ -8946,7 +8860,6 @@ export namespace Prisma {
 
   export type TaskcMinOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     ticketId?: SortOrder
     status?: SortOrder
     title?: SortOrder
@@ -9707,8 +9620,6 @@ export namespace Prisma {
   }
 
   export type TicketCreateWithoutSectorInput = {
-    uuid: string
-    code: string
     title: string
     description?: string | null
     status?: $Enums.statusType
@@ -9721,8 +9632,6 @@ export namespace Prisma {
 
   export type TicketUncheckedCreateWithoutSectorInput = {
     id?: number
-    uuid: string
-    code: string
     title: string
     description?: string | null
     status?: $Enums.statusType
@@ -9800,8 +9709,6 @@ export namespace Prisma {
     OR?: TicketScalarWhereInput[]
     NOT?: TicketScalarWhereInput | TicketScalarWhereInput[]
     id?: IntFilter<"Ticket"> | number
-    uuid?: StringFilter<"Ticket"> | string
-    code?: StringFilter<"Ticket"> | string
     title?: StringFilter<"Ticket"> | string
     description?: StringNullableFilter<"Ticket"> | string | null
     sectorid?: IntNullableFilter<"Ticket"> | number | null
@@ -9813,7 +9720,6 @@ export namespace Prisma {
   }
 
   export type TaskcCreateWithoutTikectInput = {
-    uuid: string
     status?: $Enums.statusType
     title: string
     description: string
@@ -9825,7 +9731,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedCreateWithoutTikectInput = {
     id?: number
-    uuid: string
     status?: $Enums.statusType
     title: string
     description: string
@@ -9886,7 +9791,6 @@ export namespace Prisma {
     OR?: TaskcScalarWhereInput[]
     NOT?: TaskcScalarWhereInput | TaskcScalarWhereInput[]
     id?: IntFilter<"Taskc"> | number
-    uuid?: StringFilter<"Taskc"> | string
     ticketId?: IntFilter<"Taskc"> | number
     status?: EnumstatusTypeFilter<"Taskc"> | $Enums.statusType
     title?: StringFilter<"Taskc"> | string
@@ -9944,7 +9848,6 @@ export namespace Prisma {
   }
 
   export type TaskcCreateWithoutUserInput = {
-    uuid: string
     status?: $Enums.statusType
     title: string
     description: string
@@ -9956,7 +9859,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedCreateWithoutUserInput = {
     id?: number
-    uuid: string
     ticketId: number
     status?: $Enums.statusType
     title: string
@@ -10124,8 +10026,6 @@ export namespace Prisma {
   }
 
   export type TicketCreateWithoutTaskcInput = {
-    uuid: string
-    code: string
     title: string
     description?: string | null
     status?: $Enums.statusType
@@ -10138,8 +10038,6 @@ export namespace Prisma {
 
   export type TicketUncheckedCreateWithoutTaskcInput = {
     id?: number
-    uuid: string
-    code: string
     title: string
     description?: string | null
     sectorid?: number | null
@@ -10213,8 +10111,6 @@ export namespace Prisma {
   }
 
   export type TicketUpdateWithoutTaskcInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -10227,8 +10123,6 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateWithoutTaskcInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
@@ -10343,8 +10237,6 @@ export namespace Prisma {
 
   export type TicketCreateManySectorInput = {
     id?: number
-    uuid: string
-    code: string
     title: string
     description?: string | null
     status?: $Enums.statusType
@@ -10406,8 +10298,6 @@ export namespace Prisma {
   }
 
   export type TicketUpdateWithoutSectorInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -10420,8 +10310,6 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateWithoutSectorInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -10434,8 +10322,6 @@ export namespace Prisma {
 
   export type TicketUncheckedUpdateManyWithoutSectorInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
@@ -10447,7 +10333,6 @@ export namespace Prisma {
 
   export type TaskcCreateManyTikectInput = {
     id?: number
-    uuid: string
     status?: $Enums.statusType
     title: string
     description: string
@@ -10458,7 +10343,6 @@ export namespace Prisma {
   }
 
   export type TaskcUpdateWithoutTikectInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10470,7 +10354,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateWithoutTikectInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10482,7 +10365,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateManyWithoutTikectInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10494,7 +10376,6 @@ export namespace Prisma {
 
   export type TaskcCreateManyUserInput = {
     id?: number
-    uuid: string
     ticketId: number
     status?: $Enums.statusType
     title: string
@@ -10517,7 +10398,6 @@ export namespace Prisma {
   }
 
   export type TaskcUpdateWithoutUserInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10529,7 +10409,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     ticketId?: IntFieldUpdateOperationsInput | number
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
@@ -10541,7 +10420,6 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     ticketId?: IntFieldUpdateOperationsInput | number
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string

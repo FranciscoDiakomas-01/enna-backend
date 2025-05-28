@@ -129,8 +129,6 @@ exports.Prisma.SectorScalarFieldEnum = {
 
 exports.Prisma.TicketScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
-  code: 'code',
   title: 'title',
   description: 'description',
   sectorid: 'sectorid',
@@ -160,7 +158,6 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.TaskcScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   ticketId: 'ticketId',
   status: 'status',
   title: 'title',

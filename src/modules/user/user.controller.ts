@@ -13,16 +13,22 @@ import {
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import isValidEmailDomain from "src/utils/isvalidEmailDomain";
-import { UpdateUserDTO } from "./dto/update-user.dto";
+import { UpdateUserDTO, UpdateUserDTOCredentials } from "./dto/update-user.dto";
 
 @Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  public async getAllUsers(@Query("page") page: string = "1") {
-    const data = await this.userService.getAll(Number(page));
-    return data;
+  public async getAllUsers(@Query("page") page: string = "1", @Query("search") search: string = "none") {
+    if (search == "none") {
+      const data = await this.userService.getAll(Number(page));
+      return data;
+    } else {
+      const data = await this.userService.getAllPatter(Number(page) , search);
+      return data;
+    }
+    
   }
   @Get("/count")
   public async getCount() {
@@ -75,5 +81,21 @@ export class UserController {
     return {
       updated,
     };
+  }
+
+  @Put("/credentials")
+  public async updateUserCredentials(
+    @Body() UserCredentials: UpdateUserDTOCredentials
+  ) {
+    const resultUpdateCredentials =
+      await this.userService.updateUserCredentialUseCase(UserCredentials);
+    if (resultUpdateCredentials.message == "updated") {
+      return resultUpdateCredentials;
+    } else {
+      throw new HttpException(
+        "Erro ao actualizar o perfil",
+        HttpStatus.UNAUTHORIZED
+      );
+    }
   }
 }

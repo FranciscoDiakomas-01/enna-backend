@@ -47,8 +47,6 @@ model sector {
 
 model Ticket {
   id          Int          @id @default(autoincrement())
-  uuid        String       @unique
-  code        String       @unique
   title       String
   description String?
   sectorid    Int?
@@ -83,7 +81,6 @@ model user {
 
 model Taskc {
   id          Int        @id @default(autoincrement())
-  uuid        String     @unique
   ticketId    Int
   status      statusType @default(Pending)
   title       String
