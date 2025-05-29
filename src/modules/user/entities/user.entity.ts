@@ -10,9 +10,6 @@ type IUser = {
   bio: string
   type : userType
   sectorid : number
-  completed : number
-  cancelled : number
-  pedding : number
 }
 
 export default IUser

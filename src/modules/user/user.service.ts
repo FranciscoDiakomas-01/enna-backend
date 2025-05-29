@@ -23,9 +23,6 @@ export class UserService {
           name: true,
           lastname: true,
           bio: true,
-          cancelled: true,
-          completed: true,
-          pedding: true,
           email: true,
           updated: true,
           sectorid: true,
@@ -46,8 +43,33 @@ export class UserService {
           },
         },
       });
+      const usersWithTaskCounts = await Promise.all(
+        users.map(async (user) => {
+          const [pending, cancelled, completed] = await Promise.all([
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Pending" },
+            }),
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Cancelled" },
+            }),
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Completed" },
+            }),
+          ]);
+
+          return {
+            ...user,
+            taskStats: {
+              pending,
+              cancelled,
+              completed,
+            },
+          };
+        })
+      );
+  
       return {
-        data: users,
+        data: usersWithTaskCounts,
         lastPage,
         total: total.value,
         limit: serverConstants.paginationLimit,
@@ -73,9 +95,6 @@ export class UserService {
           name: true,
           lastname: true,
           bio: true,
-          cancelled: true,
-          completed: true,
-          pedding: true,
           email: true,
           updated: true,
           sectorid: true,
@@ -122,13 +141,37 @@ export class UserService {
           ],
         },
       });
+      const usersWithTaskCounts = await Promise.all(
+        users.map(async (user) => {
+          const [pending, cancelled, completed] = await Promise.all([
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Pending" },
+            }),
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Cancelled" },
+            }),
+            this.databaseService.taskc.count({
+              where: { owner: user.id, status: "Completed" },
+            }),
+          ]);
+
+          return {
+            ...user,
+            taskStats: {
+              pending,
+              cancelled,
+              completed,
+            },
+          };
+        })
+      );
       return {
-        data: users,
+        data: usersWithTaskCounts,
         lastPage,
         total: total.value,
         limit: serverConstants.paginationLimit,
         page,
-        filter : pattern
+        filter: pattern,
       };
     } catch (error) {
       return {
@@ -151,11 +194,8 @@ export class UserService {
           name: true,
           lastname: true,
           bio: true,
-          completed: true,
           created: true,
           type: true,
-          cancelled: true,
-          pedding: true,
           tel: true,
           updated: true,
           sectorid: true,

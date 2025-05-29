@@ -45,10 +45,6 @@ async function bootstrap() {
       },
     })
   );
-
-  server.useStaticAssets("public", {
-    prefix: "/public/",
-  });
   await server.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

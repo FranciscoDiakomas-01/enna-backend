@@ -149,9 +149,6 @@ exports.Prisma.UserScalarFieldEnum = {
   bio: 'bio',
   type: 'type',
   sectorid: 'sectorid',
-  completed: 'completed',
-  cancelled: 'cancelled',
-  pedding: 'pedding',
   created: 'created',
   updated: 'updated'
 };
@@ -170,7 +167,6 @@ exports.Prisma.TaskcScalarFieldEnum = {
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   owner: 'owner',
   read: 'read',
   text: 'text',

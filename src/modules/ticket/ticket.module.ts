@@ -6,6 +6,7 @@ import DatabaseModule from '../database/database.module';
 @Module({
   controllers: [TicketController],
   providers: [TicketService],
-  imports : [DatabaseModule]
+  imports: [DatabaseModule],
+  exports: [TicketService],
 })
 export class TicketModule {}

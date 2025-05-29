@@ -3736,17 +3736,11 @@ export namespace Prisma {
   export type UserAvgAggregateOutputType = {
     id: number | null
     sectorid: number | null
-    completed: number | null
-    cancelled: number | null
-    pedding: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
     sectorid: number | null
-    completed: number | null
-    cancelled: number | null
-    pedding: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -3759,9 +3753,6 @@ export namespace Prisma {
     bio: string | null
     type: $Enums.userType | null
     sectorid: number | null
-    completed: number | null
-    cancelled: number | null
-    pedding: number | null
     created: Date | null
     updated: Date | null
   }
@@ -3776,9 +3767,6 @@ export namespace Prisma {
     bio: string | null
     type: $Enums.userType | null
     sectorid: number | null
-    completed: number | null
-    cancelled: number | null
-    pedding: number | null
     created: Date | null
     updated: Date | null
   }
@@ -3793,9 +3781,6 @@ export namespace Prisma {
     bio: number
     type: number
     sectorid: number
-    completed: number
-    cancelled: number
-    pedding: number
     created: number
     updated: number
     _all: number
@@ -3805,17 +3790,11 @@ export namespace Prisma {
   export type UserAvgAggregateInputType = {
     id?: true
     sectorid?: true
-    completed?: true
-    cancelled?: true
-    pedding?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
     sectorid?: true
-    completed?: true
-    cancelled?: true
-    pedding?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -3828,9 +3807,6 @@ export namespace Prisma {
     bio?: true
     type?: true
     sectorid?: true
-    completed?: true
-    cancelled?: true
-    pedding?: true
     created?: true
     updated?: true
   }
@@ -3845,9 +3821,6 @@ export namespace Prisma {
     bio?: true
     type?: true
     sectorid?: true
-    completed?: true
-    cancelled?: true
-    pedding?: true
     created?: true
     updated?: true
   }
@@ -3862,9 +3835,6 @@ export namespace Prisma {
     bio?: true
     type?: true
     sectorid?: true
-    completed?: true
-    cancelled?: true
-    pedding?: true
     created?: true
     updated?: true
     _all?: true
@@ -3966,9 +3936,6 @@ export namespace Prisma {
     bio: string | null
     type: $Enums.userType
     sectorid: number | null
-    completed: number
-    cancelled: number
-    pedding: number
     created: Date
     updated: Date
     _count: UserCountAggregateOutputType | null
@@ -4002,9 +3969,6 @@ export namespace Prisma {
     bio?: boolean
     type?: boolean
     sectorid?: boolean
-    completed?: boolean
-    cancelled?: boolean
-    pedding?: boolean
     created?: boolean
     updated?: boolean
     sector?: boolean | user$sectorArgs<ExtArgs>
@@ -4023,9 +3987,6 @@ export namespace Prisma {
     bio?: boolean
     type?: boolean
     sectorid?: boolean
-    completed?: boolean
-    cancelled?: boolean
-    pedding?: boolean
     created?: boolean
     updated?: boolean
     sector?: boolean | user$sectorArgs<ExtArgs>
@@ -4041,9 +4002,6 @@ export namespace Prisma {
     bio?: boolean
     type?: boolean
     sectorid?: boolean
-    completed?: boolean
-    cancelled?: boolean
-    pedding?: boolean
     created?: boolean
     updated?: boolean
     sector?: boolean | user$sectorArgs<ExtArgs>
@@ -4059,14 +4017,11 @@ export namespace Prisma {
     bio?: boolean
     type?: boolean
     sectorid?: boolean
-    completed?: boolean
-    cancelled?: boolean
-    pedding?: boolean
     created?: boolean
     updated?: boolean
   }
 
-  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "lastname" | "email" | "tel" | "password" | "bio" | "type" | "sectorid" | "completed" | "cancelled" | "pedding" | "created" | "updated", ExtArgs["result"]["user"]>
+  export type userOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "lastname" | "email" | "tel" | "password" | "bio" | "type" | "sectorid" | "created" | "updated", ExtArgs["result"]["user"]>
   export type userInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sector?: boolean | user$sectorArgs<ExtArgs>
     Taskc?: boolean | user$TaskcArgs<ExtArgs>
@@ -4097,9 +4052,6 @@ export namespace Prisma {
       bio: string | null
       type: $Enums.userType
       sectorid: number | null
-      completed: number
-      cancelled: number
-      pedding: number
       created: Date
       updated: Date
     }, ExtArgs["result"]["user"]>
@@ -4537,9 +4489,6 @@ export namespace Prisma {
     readonly bio: FieldRef<"user", 'String'>
     readonly type: FieldRef<"user", 'userType'>
     readonly sectorid: FieldRef<"user", 'Int'>
-    readonly completed: FieldRef<"user", 'Int'>
-    readonly cancelled: FieldRef<"user", 'Int'>
-    readonly pedding: FieldRef<"user", 'Int'>
     readonly created: FieldRef<"user", 'DateTime'>
     readonly updated: FieldRef<"user", 'DateTime'>
   }
@@ -5222,11 +5171,11 @@ export namespace Prisma {
 
   export type TaskcGroupByOutputType = {
     id: number
-    ticketId: number
+    ticketId: number | null
     status: $Enums.statusType
     title: string
     description: string
-    owner: number
+    owner: number | null
     created: Date
     updated: Date
     finished: Date | null
@@ -5261,8 +5210,8 @@ export namespace Prisma {
     created?: boolean
     updated?: boolean
     finished?: boolean
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }, ExtArgs["result"]["taskc"]>
 
   export type TaskcSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5275,8 +5224,8 @@ export namespace Prisma {
     created?: boolean
     updated?: boolean
     finished?: boolean
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }, ExtArgs["result"]["taskc"]>
 
   export type TaskcSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5289,8 +5238,8 @@ export namespace Prisma {
     created?: boolean
     updated?: boolean
     finished?: boolean
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }, ExtArgs["result"]["taskc"]>
 
   export type TaskcSelectScalar = {
@@ -5307,31 +5256,31 @@ export namespace Prisma {
 
   export type TaskcOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketId" | "status" | "title" | "description" | "owner" | "created" | "updated" | "finished", ExtArgs["result"]["taskc"]>
   export type TaskcInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }
   export type TaskcIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }
   export type TaskcIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | userDefaultArgs<ExtArgs>
-    tikect?: boolean | TicketDefaultArgs<ExtArgs>
+    user?: boolean | Taskc$userArgs<ExtArgs>
+    tikect?: boolean | Taskc$tikectArgs<ExtArgs>
   }
 
   export type $TaskcPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Taskc"
     objects: {
-      user: Prisma.$userPayload<ExtArgs>
-      tikect: Prisma.$TicketPayload<ExtArgs>
+      user: Prisma.$userPayload<ExtArgs> | null
+      tikect: Prisma.$TicketPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      ticketId: number
+      ticketId: number | null
       status: $Enums.statusType
       title: string
       description: string
-      owner: number
+      owner: number | null
       created: Date
       updated: Date
       finished: Date | null
@@ -5729,8 +5678,8 @@ export namespace Prisma {
    */
   export interface Prisma__TaskcClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends userDefaultArgs<ExtArgs> = {}>(args?: Subset<T, userDefaultArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    tikect<T extends TicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketDefaultArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Taskc$userArgs<ExtArgs> = {}>(args?: Subset<T, Taskc$userArgs<ExtArgs>>): Prisma__userClient<$Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tikect<T extends Taskc$tikectArgs<ExtArgs> = {}>(args?: Subset<T, Taskc$tikectArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6165,6 +6114,44 @@ export namespace Prisma {
   }
 
   /**
+   * Taskc.user
+   */
+  export type Taskc$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the user
+     */
+    select?: userSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the user
+     */
+    omit?: userOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: userInclude<ExtArgs> | null
+    where?: userWhereInput
+  }
+
+  /**
+   * Taskc.tikect
+   */
+  export type Taskc$tikectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket
+     */
+    select?: TicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket
+     */
+    omit?: TicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketInclude<ExtArgs> | null
+    where?: TicketWhereInput
+  }
+
+  /**
    * Taskc without action
    */
   export type TaskcDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6207,7 +6194,6 @@ export namespace Prisma {
 
   export type NotificationMinAggregateOutputType = {
     id: number | null
-    uuid: string | null
     owner: number | null
     read: boolean | null
     text: string | null
@@ -6220,7 +6206,6 @@ export namespace Prisma {
 
   export type NotificationMaxAggregateOutputType = {
     id: number | null
-    uuid: string | null
     owner: number | null
     read: boolean | null
     text: string | null
@@ -6233,7 +6218,6 @@ export namespace Prisma {
 
   export type NotificationCountAggregateOutputType = {
     id: number
-    uuid: number
     owner: number
     read: number
     text: number
@@ -6258,7 +6242,6 @@ export namespace Prisma {
 
   export type NotificationMinAggregateInputType = {
     id?: true
-    uuid?: true
     owner?: true
     read?: true
     text?: true
@@ -6271,7 +6254,6 @@ export namespace Prisma {
 
   export type NotificationMaxAggregateInputType = {
     id?: true
-    uuid?: true
     owner?: true
     read?: true
     text?: true
@@ -6284,7 +6266,6 @@ export namespace Prisma {
 
   export type NotificationCountAggregateInputType = {
     id?: true
-    uuid?: true
     owner?: true
     read?: true
     text?: true
@@ -6384,7 +6365,6 @@ export namespace Prisma {
 
   export type NotificationGroupByOutputType = {
     id: number
-    uuid: string
     owner: number
     read: boolean
     text: string
@@ -6416,7 +6396,6 @@ export namespace Prisma {
 
   export type notificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     owner?: boolean
     read?: boolean
     text?: boolean
@@ -6430,7 +6409,6 @@ export namespace Prisma {
 
   export type notificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     owner?: boolean
     read?: boolean
     text?: boolean
@@ -6444,7 +6422,6 @@ export namespace Prisma {
 
   export type notificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    uuid?: boolean
     owner?: boolean
     read?: boolean
     text?: boolean
@@ -6458,7 +6435,6 @@ export namespace Prisma {
 
   export type notificationSelectScalar = {
     id?: boolean
-    uuid?: boolean
     owner?: boolean
     read?: boolean
     text?: boolean
@@ -6469,7 +6445,7 @@ export namespace Prisma {
     updated?: boolean
   }
 
-  export type notificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "uuid" | "owner" | "read" | "text" | "deeplink" | "message" | "type" | "created" | "updated", ExtArgs["result"]["notification"]>
+  export type notificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "owner" | "read" | "text" | "deeplink" | "message" | "type" | "created" | "updated", ExtArgs["result"]["notification"]>
   export type notificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | userDefaultArgs<ExtArgs>
   }
@@ -6487,7 +6463,6 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      uuid: string
       owner: number
       read: boolean
       text: string
@@ -6921,7 +6896,6 @@ export namespace Prisma {
    */
   interface notificationFieldRefs {
     readonly id: FieldRef<"notification", 'Int'>
-    readonly uuid: FieldRef<"notification", 'String'>
     readonly owner: FieldRef<"notification", 'Int'>
     readonly read: FieldRef<"notification", 'Boolean'>
     readonly text: FieldRef<"notification", 'String'>
@@ -7393,9 +7367,6 @@ export namespace Prisma {
     bio: 'bio',
     type: 'type',
     sectorid: 'sectorid',
-    completed: 'completed',
-    cancelled: 'cancelled',
-    pedding: 'pedding',
     created: 'created',
     updated: 'updated'
   };
@@ -7420,7 +7391,6 @@ export namespace Prisma {
 
   export const NotificationScalarFieldEnum: {
     id: 'id',
-    uuid: 'uuid',
     owner: 'owner',
     read: 'read',
     text: 'text',
@@ -7733,9 +7703,6 @@ export namespace Prisma {
     bio?: StringNullableFilter<"user"> | string | null
     type?: EnumuserTypeFilter<"user"> | $Enums.userType
     sectorid?: IntNullableFilter<"user"> | number | null
-    completed?: IntFilter<"user"> | number
-    cancelled?: IntFilter<"user"> | number
-    pedding?: IntFilter<"user"> | number
     created?: DateTimeFilter<"user"> | Date | string
     updated?: DateTimeFilter<"user"> | Date | string
     sector?: XOR<SectorNullableScalarRelationFilter, sectorWhereInput> | null
@@ -7753,9 +7720,6 @@ export namespace Prisma {
     bio?: SortOrderInput | SortOrder
     type?: SortOrder
     sectorid?: SortOrderInput | SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
     created?: SortOrder
     updated?: SortOrder
     sector?: sectorOrderByWithRelationInput
@@ -7776,9 +7740,6 @@ export namespace Prisma {
     bio?: StringNullableFilter<"user"> | string | null
     type?: EnumuserTypeFilter<"user"> | $Enums.userType
     sectorid?: IntNullableFilter<"user"> | number | null
-    completed?: IntFilter<"user"> | number
-    cancelled?: IntFilter<"user"> | number
-    pedding?: IntFilter<"user"> | number
     created?: DateTimeFilter<"user"> | Date | string
     updated?: DateTimeFilter<"user"> | Date | string
     sector?: XOR<SectorNullableScalarRelationFilter, sectorWhereInput> | null
@@ -7796,9 +7757,6 @@ export namespace Prisma {
     bio?: SortOrderInput | SortOrder
     type?: SortOrder
     sectorid?: SortOrderInput | SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
     created?: SortOrder
     updated?: SortOrder
     _count?: userCountOrderByAggregateInput
@@ -7821,9 +7779,6 @@ export namespace Prisma {
     bio?: StringNullableWithAggregatesFilter<"user"> | string | null
     type?: EnumuserTypeWithAggregatesFilter<"user"> | $Enums.userType
     sectorid?: IntNullableWithAggregatesFilter<"user"> | number | null
-    completed?: IntWithAggregatesFilter<"user"> | number
-    cancelled?: IntWithAggregatesFilter<"user"> | number
-    pedding?: IntWithAggregatesFilter<"user"> | number
     created?: DateTimeWithAggregatesFilter<"user"> | Date | string
     updated?: DateTimeWithAggregatesFilter<"user"> | Date | string
   }
@@ -7833,25 +7788,25 @@ export namespace Prisma {
     OR?: TaskcWhereInput[]
     NOT?: TaskcWhereInput | TaskcWhereInput[]
     id?: IntFilter<"Taskc"> | number
-    ticketId?: IntFilter<"Taskc"> | number
+    ticketId?: IntNullableFilter<"Taskc"> | number | null
     status?: EnumstatusTypeFilter<"Taskc"> | $Enums.statusType
     title?: StringFilter<"Taskc"> | string
     description?: StringFilter<"Taskc"> | string
-    owner?: IntFilter<"Taskc"> | number
+    owner?: IntNullableFilter<"Taskc"> | number | null
     created?: DateTimeFilter<"Taskc"> | Date | string
     updated?: DateTimeFilter<"Taskc"> | Date | string
     finished?: DateTimeNullableFilter<"Taskc"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-    tikect?: XOR<TicketScalarRelationFilter, TicketWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, userWhereInput> | null
+    tikect?: XOR<TicketNullableScalarRelationFilter, TicketWhereInput> | null
   }
 
   export type TaskcOrderByWithRelationInput = {
     id?: SortOrder
-    ticketId?: SortOrder
+    ticketId?: SortOrderInput | SortOrder
     status?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    owner?: SortOrder
+    owner?: SortOrderInput | SortOrder
     created?: SortOrder
     updated?: SortOrder
     finished?: SortOrderInput | SortOrder
@@ -7861,28 +7816,29 @@ export namespace Prisma {
 
   export type TaskcWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    ticketId_owner?: TaskcTicketIdOwnerCompoundUniqueInput
     AND?: TaskcWhereInput | TaskcWhereInput[]
     OR?: TaskcWhereInput[]
     NOT?: TaskcWhereInput | TaskcWhereInput[]
-    ticketId?: IntFilter<"Taskc"> | number
+    ticketId?: IntNullableFilter<"Taskc"> | number | null
     status?: EnumstatusTypeFilter<"Taskc"> | $Enums.statusType
     title?: StringFilter<"Taskc"> | string
     description?: StringFilter<"Taskc"> | string
-    owner?: IntFilter<"Taskc"> | number
+    owner?: IntNullableFilter<"Taskc"> | number | null
     created?: DateTimeFilter<"Taskc"> | Date | string
     updated?: DateTimeFilter<"Taskc"> | Date | string
     finished?: DateTimeNullableFilter<"Taskc"> | Date | string | null
-    user?: XOR<UserScalarRelationFilter, userWhereInput>
-    tikect?: XOR<TicketScalarRelationFilter, TicketWhereInput>
-  }, "id">
+    user?: XOR<UserNullableScalarRelationFilter, userWhereInput> | null
+    tikect?: XOR<TicketNullableScalarRelationFilter, TicketWhereInput> | null
+  }, "id" | "ticketId_owner">
 
   export type TaskcOrderByWithAggregationInput = {
     id?: SortOrder
-    ticketId?: SortOrder
+    ticketId?: SortOrderInput | SortOrder
     status?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    owner?: SortOrder
+    owner?: SortOrderInput | SortOrder
     created?: SortOrder
     updated?: SortOrder
     finished?: SortOrderInput | SortOrder
@@ -7898,11 +7854,11 @@ export namespace Prisma {
     OR?: TaskcScalarWhereWithAggregatesInput[]
     NOT?: TaskcScalarWhereWithAggregatesInput | TaskcScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Taskc"> | number
-    ticketId?: IntWithAggregatesFilter<"Taskc"> | number
+    ticketId?: IntNullableWithAggregatesFilter<"Taskc"> | number | null
     status?: EnumstatusTypeWithAggregatesFilter<"Taskc"> | $Enums.statusType
     title?: StringWithAggregatesFilter<"Taskc"> | string
     description?: StringWithAggregatesFilter<"Taskc"> | string
-    owner?: IntWithAggregatesFilter<"Taskc"> | number
+    owner?: IntNullableWithAggregatesFilter<"Taskc"> | number | null
     created?: DateTimeWithAggregatesFilter<"Taskc"> | Date | string
     updated?: DateTimeWithAggregatesFilter<"Taskc"> | Date | string
     finished?: DateTimeNullableWithAggregatesFilter<"Taskc"> | Date | string | null
@@ -7913,7 +7869,6 @@ export namespace Prisma {
     OR?: notificationWhereInput[]
     NOT?: notificationWhereInput | notificationWhereInput[]
     id?: IntFilter<"notification"> | number
-    uuid?: StringFilter<"notification"> | string
     owner?: IntFilter<"notification"> | number
     read?: BoolFilter<"notification"> | boolean
     text?: StringFilter<"notification"> | string
@@ -7927,7 +7882,6 @@ export namespace Prisma {
 
   export type notificationOrderByWithRelationInput = {
     id?: SortOrder
-    uuid?: SortOrder
     owner?: SortOrder
     read?: SortOrder
     text?: SortOrder
@@ -7941,7 +7895,6 @@ export namespace Prisma {
 
   export type notificationWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    uuid?: string
     AND?: notificationWhereInput | notificationWhereInput[]
     OR?: notificationWhereInput[]
     NOT?: notificationWhereInput | notificationWhereInput[]
@@ -7954,11 +7907,10 @@ export namespace Prisma {
     created?: DateTimeFilter<"notification"> | Date | string
     updated?: DateTimeFilter<"notification"> | Date | string
     user?: XOR<UserScalarRelationFilter, userWhereInput>
-  }, "id" | "uuid">
+  }, "id">
 
   export type notificationOrderByWithAggregationInput = {
     id?: SortOrder
-    uuid?: SortOrder
     owner?: SortOrder
     read?: SortOrder
     text?: SortOrder
@@ -7979,7 +7931,6 @@ export namespace Prisma {
     OR?: notificationScalarWhereWithAggregatesInput[]
     NOT?: notificationScalarWhereWithAggregatesInput | notificationScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"notification"> | number
-    uuid?: StringWithAggregatesFilter<"notification"> | string
     owner?: IntWithAggregatesFilter<"notification"> | number
     read?: BoolWithAggregatesFilter<"notification"> | boolean
     text?: StringWithAggregatesFilter<"notification"> | string
@@ -8136,9 +8087,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     sector?: sectorCreateNestedOneWithoutUsersInput
@@ -8156,9 +8104,6 @@ export namespace Prisma {
     bio?: string | null
     type?: $Enums.userType
     sectorid?: number | null
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     Taskc?: TaskcUncheckedCreateNestedManyWithoutUserInput
@@ -8173,9 +8118,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     sector?: sectorUpdateOneWithoutUsersNestedInput
@@ -8193,9 +8135,6 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     Taskc?: TaskcUncheckedUpdateManyWithoutUserNestedInput
@@ -8212,9 +8151,6 @@ export namespace Prisma {
     bio?: string | null
     type?: $Enums.userType
     sectorid?: number | null
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
   }
@@ -8227,9 +8163,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8244,9 +8177,6 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8258,17 +8188,17 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
-    user: userCreateNestedOneWithoutTaskcInput
-    tikect: TicketCreateNestedOneWithoutTaskcInput
+    user?: userCreateNestedOneWithoutTaskcInput
+    tikect?: TicketCreateNestedOneWithoutTaskcInput
   }
 
   export type TaskcUncheckedCreateInput = {
     id?: number
-    ticketId: number
+    ticketId?: number | null
     status?: $Enums.statusType
     title: string
     description: string
-    owner: number
+    owner?: number | null
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
@@ -8281,17 +8211,17 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: userUpdateOneRequiredWithoutTaskcNestedInput
-    tikect?: TicketUpdateOneRequiredWithoutTaskcNestedInput
+    user?: userUpdateOneWithoutTaskcNestedInput
+    tikect?: TicketUpdateOneWithoutTaskcNestedInput
   }
 
   export type TaskcUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ticketId?: IntFieldUpdateOperationsInput | number
+    ticketId?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    owner?: IntFieldUpdateOperationsInput | number
+    owner?: NullableIntFieldUpdateOperationsInput | number | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8299,11 +8229,11 @@ export namespace Prisma {
 
   export type TaskcCreateManyInput = {
     id?: number
-    ticketId: number
+    ticketId?: number | null
     status?: $Enums.statusType
     title: string
     description: string
-    owner: number
+    owner?: number | null
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
@@ -8320,18 +8250,17 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ticketId?: IntFieldUpdateOperationsInput | number
+    ticketId?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    owner?: IntFieldUpdateOperationsInput | number
+    owner?: NullableIntFieldUpdateOperationsInput | number | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type notificationCreateInput = {
-    uuid: string
     read?: boolean
     text: string
     deeplink?: string | null
@@ -8344,7 +8273,6 @@ export namespace Prisma {
 
   export type notificationUncheckedCreateInput = {
     id?: number
-    uuid: string
     owner: number
     read?: boolean
     text: string
@@ -8356,7 +8284,6 @@ export namespace Prisma {
   }
 
   export type notificationUpdateInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
     deeplink?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8369,7 +8296,6 @@ export namespace Prisma {
 
   export type notificationUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     owner?: IntFieldUpdateOperationsInput | number
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
@@ -8382,7 +8308,6 @@ export namespace Prisma {
 
   export type notificationCreateManyInput = {
     id?: number
-    uuid: string
     owner: number
     read?: boolean
     text: string
@@ -8394,7 +8319,6 @@ export namespace Prisma {
   }
 
   export type notificationUpdateManyMutationInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
     deeplink?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8406,7 +8330,6 @@ export namespace Prisma {
 
   export type notificationUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     owner?: IntFieldUpdateOperationsInput | number
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
@@ -8740,9 +8663,6 @@ export namespace Prisma {
     bio?: SortOrder
     type?: SortOrder
     sectorid?: SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -8750,9 +8670,6 @@ export namespace Prisma {
   export type userAvgOrderByAggregateInput = {
     id?: SortOrder
     sectorid?: SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
   }
 
   export type userMaxOrderByAggregateInput = {
@@ -8765,9 +8682,6 @@ export namespace Prisma {
     bio?: SortOrder
     type?: SortOrder
     sectorid?: SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -8782,9 +8696,6 @@ export namespace Prisma {
     bio?: SortOrder
     type?: SortOrder
     sectorid?: SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -8792,9 +8703,6 @@ export namespace Prisma {
   export type userSumOrderByAggregateInput = {
     id?: SortOrder
     sectorid?: SortOrder
-    completed?: SortOrder
-    cancelled?: SortOrder
-    pedding?: SortOrder
   }
 
   export type EnumuserTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8818,14 +8726,19 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type UserScalarRelationFilter = {
-    is?: userWhereInput
-    isNot?: userWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: userWhereInput | null
+    isNot?: userWhereInput | null
   }
 
-  export type TicketScalarRelationFilter = {
-    is?: TicketWhereInput
-    isNot?: TicketWhereInput
+  export type TicketNullableScalarRelationFilter = {
+    is?: TicketWhereInput | null
+    isNot?: TicketWhereInput | null
+  }
+
+  export type TaskcTicketIdOwnerCompoundUniqueInput = {
+    ticketId: number
+    owner: number
   }
 
   export type TaskcCountOrderByAggregateInput = {
@@ -8902,9 +8815,13 @@ export namespace Prisma {
     not?: NestedEnumnotificationTypeFilter<$PrismaModel> | $Enums.notificationType
   }
 
+  export type UserScalarRelationFilter = {
+    is?: userWhereInput
+    isNot?: userWhereInput
+  }
+
   export type notificationCountOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     owner?: SortOrder
     read?: SortOrder
     text?: SortOrder
@@ -8922,7 +8839,6 @@ export namespace Prisma {
 
   export type notificationMaxOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     owner?: SortOrder
     read?: SortOrder
     text?: SortOrder
@@ -8935,7 +8851,6 @@ export namespace Prisma {
 
   export type notificationMinOrderByAggregateInput = {
     id?: SortOrder
-    uuid?: SortOrder
     owner?: SortOrder
     read?: SortOrder
     text?: SortOrder
@@ -9267,18 +9182,22 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type userUpdateOneRequiredWithoutTaskcNestedInput = {
+  export type userUpdateOneWithoutTaskcNestedInput = {
     create?: XOR<userCreateWithoutTaskcInput, userUncheckedCreateWithoutTaskcInput>
     connectOrCreate?: userCreateOrConnectWithoutTaskcInput
     upsert?: userUpsertWithoutTaskcInput
+    disconnect?: userWhereInput | boolean
+    delete?: userWhereInput | boolean
     connect?: userWhereUniqueInput
     update?: XOR<XOR<userUpdateToOneWithWhereWithoutTaskcInput, userUpdateWithoutTaskcInput>, userUncheckedUpdateWithoutTaskcInput>
   }
 
-  export type TicketUpdateOneRequiredWithoutTaskcNestedInput = {
+  export type TicketUpdateOneWithoutTaskcNestedInput = {
     create?: XOR<TicketCreateWithoutTaskcInput, TicketUncheckedCreateWithoutTaskcInput>
     connectOrCreate?: TicketCreateOrConnectWithoutTaskcInput
     upsert?: TicketUpsertWithoutTaskcInput
+    disconnect?: TicketWhereInput | boolean
+    delete?: TicketWhereInput | boolean
     connect?: TicketWhereUniqueInput
     update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutTaskcInput, TicketUpdateWithoutTaskcInput>, TicketUncheckedUpdateWithoutTaskcInput>
   }
@@ -9582,9 +9501,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     Taskc?: TaskcCreateNestedManyWithoutUserInput
@@ -9600,9 +9516,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     Taskc?: TaskcUncheckedCreateNestedManyWithoutUserInput
@@ -9681,9 +9594,6 @@ export namespace Prisma {
     bio?: StringNullableFilter<"user"> | string | null
     type?: EnumuserTypeFilter<"user"> | $Enums.userType
     sectorid?: IntNullableFilter<"user"> | number | null
-    completed?: IntFilter<"user"> | number
-    cancelled?: IntFilter<"user"> | number
-    pedding?: IntFilter<"user"> | number
     created?: DateTimeFilter<"user"> | Date | string
     updated?: DateTimeFilter<"user"> | Date | string
   }
@@ -9726,7 +9636,7 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
-    user: userCreateNestedOneWithoutTaskcInput
+    user?: userCreateNestedOneWithoutTaskcInput
   }
 
   export type TaskcUncheckedCreateWithoutTikectInput = {
@@ -9734,7 +9644,7 @@ export namespace Prisma {
     status?: $Enums.statusType
     title: string
     description: string
-    owner: number
+    owner?: number | null
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
@@ -9791,11 +9701,11 @@ export namespace Prisma {
     OR?: TaskcScalarWhereInput[]
     NOT?: TaskcScalarWhereInput | TaskcScalarWhereInput[]
     id?: IntFilter<"Taskc"> | number
-    ticketId?: IntFilter<"Taskc"> | number
+    ticketId?: IntNullableFilter<"Taskc"> | number | null
     status?: EnumstatusTypeFilter<"Taskc"> | $Enums.statusType
     title?: StringFilter<"Taskc"> | string
     description?: StringFilter<"Taskc"> | string
-    owner?: IntFilter<"Taskc"> | number
+    owner?: IntNullableFilter<"Taskc"> | number | null
     created?: DateTimeFilter<"Taskc"> | Date | string
     updated?: DateTimeFilter<"Taskc"> | Date | string
     finished?: DateTimeNullableFilter<"Taskc"> | Date | string | null
@@ -9854,12 +9764,12 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
-    tikect: TicketCreateNestedOneWithoutTaskcInput
+    tikect?: TicketCreateNestedOneWithoutTaskcInput
   }
 
   export type TaskcUncheckedCreateWithoutUserInput = {
     id?: number
-    ticketId: number
+    ticketId?: number | null
     status?: $Enums.statusType
     title: string
     description: string
@@ -9879,7 +9789,6 @@ export namespace Prisma {
   }
 
   export type notificationCreateWithoutUserInput = {
-    uuid: string
     read?: boolean
     text: string
     deeplink?: string | null
@@ -9891,7 +9800,6 @@ export namespace Prisma {
 
   export type notificationUncheckedCreateWithoutUserInput = {
     id?: number
-    uuid: string
     read?: boolean
     text: string
     deeplink?: string | null
@@ -9974,7 +9882,6 @@ export namespace Prisma {
     OR?: notificationScalarWhereInput[]
     NOT?: notificationScalarWhereInput | notificationScalarWhereInput[]
     id?: IntFilter<"notification"> | number
-    uuid?: StringFilter<"notification"> | string
     owner?: IntFilter<"notification"> | number
     read?: BoolFilter<"notification"> | boolean
     text?: StringFilter<"notification"> | string
@@ -9993,9 +9900,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     sector?: sectorCreateNestedOneWithoutUsersInput
@@ -10012,9 +9916,6 @@ export namespace Prisma {
     bio?: string | null
     type?: $Enums.userType
     sectorid?: number | null
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     notification?: notificationUncheckedCreateNestedManyWithoutUserInput
@@ -10072,9 +9973,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     sector?: sectorUpdateOneWithoutUsersNestedInput
@@ -10091,9 +9989,6 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     notification?: notificationUncheckedUpdateManyWithoutUserNestedInput
@@ -10141,9 +10036,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     sector?: sectorCreateNestedOneWithoutUsersInput
@@ -10160,9 +10052,6 @@ export namespace Prisma {
     bio?: string | null
     type?: $Enums.userType
     sectorid?: number | null
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
     Taskc?: TaskcUncheckedCreateNestedManyWithoutUserInput
@@ -10192,9 +10081,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     sector?: sectorUpdateOneWithoutUsersNestedInput
@@ -10211,9 +10097,6 @@ export namespace Prisma {
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
     sectorid?: NullableIntFieldUpdateOperationsInput | number | null
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     Taskc?: TaskcUncheckedUpdateManyWithoutUserNestedInput
@@ -10228,9 +10111,6 @@ export namespace Prisma {
     password: string
     bio?: string | null
     type?: $Enums.userType
-    completed?: number
-    cancelled?: number
-    pedding?: number
     created?: Date | string
     updated?: Date | string
   }
@@ -10254,9 +10134,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     Taskc?: TaskcUpdateManyWithoutUserNestedInput
@@ -10272,9 +10149,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     Taskc?: TaskcUncheckedUpdateManyWithoutUserNestedInput
@@ -10290,9 +10164,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     bio?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumuserTypeFieldUpdateOperationsInput | $Enums.userType
-    completed?: IntFieldUpdateOperationsInput | number
-    cancelled?: IntFieldUpdateOperationsInput | number
-    pedding?: IntFieldUpdateOperationsInput | number
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10336,7 +10207,7 @@ export namespace Prisma {
     status?: $Enums.statusType
     title: string
     description: string
-    owner: number
+    owner?: number | null
     created?: Date | string
     updated?: Date | string
     finished?: Date | string | null
@@ -10349,7 +10220,7 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: userUpdateOneRequiredWithoutTaskcNestedInput
+    user?: userUpdateOneWithoutTaskcNestedInput
   }
 
   export type TaskcUncheckedUpdateWithoutTikectInput = {
@@ -10357,7 +10228,7 @@ export namespace Prisma {
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    owner?: IntFieldUpdateOperationsInput | number
+    owner?: NullableIntFieldUpdateOperationsInput | number | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10368,7 +10239,7 @@ export namespace Prisma {
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    owner?: IntFieldUpdateOperationsInput | number
+    owner?: NullableIntFieldUpdateOperationsInput | number | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10376,7 +10247,7 @@ export namespace Prisma {
 
   export type TaskcCreateManyUserInput = {
     id?: number
-    ticketId: number
+    ticketId?: number | null
     status?: $Enums.statusType
     title: string
     description: string
@@ -10387,7 +10258,6 @@ export namespace Prisma {
 
   export type notificationCreateManyUserInput = {
     id?: number
-    uuid: string
     read?: boolean
     text: string
     deeplink?: string | null
@@ -10404,12 +10274,12 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tikect?: TicketUpdateOneRequiredWithoutTaskcNestedInput
+    tikect?: TicketUpdateOneWithoutTaskcNestedInput
   }
 
   export type TaskcUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ticketId?: IntFieldUpdateOperationsInput | number
+    ticketId?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10420,7 +10290,7 @@ export namespace Prisma {
 
   export type TaskcUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ticketId?: IntFieldUpdateOperationsInput | number
+    ticketId?: NullableIntFieldUpdateOperationsInput | number | null
     status?: EnumstatusTypeFieldUpdateOperationsInput | $Enums.statusType
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -10430,7 +10300,6 @@ export namespace Prisma {
   }
 
   export type notificationUpdateWithoutUserInput = {
-    uuid?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
     deeplink?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10442,7 +10311,6 @@ export namespace Prisma {
 
   export type notificationUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
     deeplink?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10454,7 +10322,6 @@ export namespace Prisma {
 
   export type notificationUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    uuid?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     text?: StringFieldUpdateOperationsInput | string
     deeplink?: NullableStringFieldUpdateOperationsInput | string | null
