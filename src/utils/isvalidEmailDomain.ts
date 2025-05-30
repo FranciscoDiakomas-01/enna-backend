@@ -1,5 +1,4 @@
 import { promises as dns } from "dns";
-
 export default async function isValidEmailDomain(
   domain: string
 ): Promise<boolean> {

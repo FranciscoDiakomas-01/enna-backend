@@ -1,5 +1,5 @@
 const serverConstants = {
-  paginationLimit: 40,
+  paginationLimit: 20,
   ticketPrefix : "TCK"
 };
 

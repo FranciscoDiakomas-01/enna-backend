@@ -3,6 +3,7 @@ import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 import helmet from "helmet";
 import * as compression from "compression";
+import { isertDefaultAdmin  } from "./utils/insertDefautlAdmin";
 import {
   ExpressAdapter,
   NestExpressApplication,
@@ -46,5 +47,7 @@ async function bootstrap() {
     })
   );
   await server.listen(process.env.PORT ?? 3000);
+  const admin = await isertDefaultAdmin()
+  console.log(admin.message)
 }
 bootstrap();

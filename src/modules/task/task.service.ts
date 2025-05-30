@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { CreateTaskDto } from "./dto/create-task.dto";
 import { UpdateTaskDTO } from "./dto/update-task.dto";
 import serverConstants from "src/constants/server";
@@ -36,6 +36,7 @@ export class TaskService {
       }
       return createdTask && createdTask?.id ? true : false;
     } catch (error) {
+      console.log(error)
       return false;
     }
   }
@@ -55,6 +56,7 @@ export class TaskService {
           id: true,
           status: true,
           title: true,
+          description: true,
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
@@ -78,14 +80,19 @@ export class TaskService {
     }
   }
   public async getAllByUser(page: number, userId: number) {
-    const total = await this.count();
-    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    const total = await this.databaseService.taskc.count({
+      where: {
+        owner: userId,
+      },
+    });
+    const lastPage = Math.ceil(total/ serverConstants.paginationLimit);
     try {
       const tasks = await this.databaseService.taskc.findMany({
         select: {
           id: true,
           status: true,
           title: true,
+          description: true,
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
@@ -97,7 +104,7 @@ export class TaskService {
       return {
         data: tasks,
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
@@ -105,16 +112,17 @@ export class TaskService {
       return {
         data: [],
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
     }
   }
-  
+
   public async getAllPatter(page: number, pattern: string, userid: number) {
     const total = await this.databaseService.taskc.count({
       where: {
+        owner : userid,
         OR: [
           {
             title: {
@@ -131,13 +139,14 @@ export class TaskService {
         ],
       },
     });
-    const lastPage = Math.ceil(total/ serverConstants.paginationLimit);
+    const lastPage = Math.ceil(total / serverConstants.paginationLimit);
     try {
       const tasks = await this.databaseService.taskc.findMany({
         select: {
           id: true,
           status: true,
           title: true,
+          description: true,
         },
         where: {
           owner: userid,
@@ -177,6 +186,7 @@ export class TaskService {
       };
     }
   }
+
   public async getAllPatterAdimin(page: number, pattern: string) {
     const total = await this.databaseService.taskc.count({
       where: {
@@ -203,6 +213,7 @@ export class TaskService {
           id: true,
           status: true,
           title: true,
+          description: true,
         },
         where: {
           OR: [
@@ -246,14 +257,22 @@ export class TaskService {
     status: statusType,
     userId: number
   ) {
-    const total = await this.count();
-    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    const total = await this.databaseService.taskc.count({
+      where: {
+        status: {
+          equals: status,
+        },
+        owner: userId,
+      },
+    });
+    const lastPage = Math.ceil(total / serverConstants.paginationLimit);
     try {
       const tasks = await this.databaseService.taskc.findMany({
         select: {
           id: true,
           status: true,
           title: true,
+          description: true,
         },
 
         skip: (page - 1) * serverConstants.paginationLimit,
@@ -263,6 +282,43 @@ export class TaskService {
             equals: status,
           },
           owner: userId,
+        },
+      });
+      return {
+        data: tasks,
+        lastPage,
+        total: total,
+        limit: serverConstants.paginationLimit,
+        page,
+      };
+    } catch (error) {
+      return {
+        data: [],
+        lastPage,
+        total: total,
+        limit: serverConstants.paginationLimit,
+        page,
+      };
+    }
+  }
+  public async getAllByStatusAdmin(page: number, status: statusType) {
+    const total = await this.count();
+    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    try {
+      const tasks = await this.databaseService.taskc.findMany({
+        select: {
+          id: true,
+          status: true,
+          title: true,
+          description: true,
+        },
+
+        skip: (page - 1) * serverConstants.paginationLimit,
+        take: serverConstants.paginationLimit,
+        where: {
+          status: {
+            equals: status,
+          },
         },
       });
       return {
@@ -292,6 +348,8 @@ export class TaskService {
           created: true,
           updated: true,
           finished: true,
+          description: true,
+          ticketId : true
         },
         where: {
           id,
@@ -304,6 +362,7 @@ export class TaskService {
               name: true,
               lastname: true,
               id: true,
+              email : true,
               bio: true,
             },
           },
@@ -377,5 +436,22 @@ export class TaskService {
     } catch (error) {
       return false;
     }
+  }
+  public async updateStatus(
+    taskId: number,
+    status: statusType
+  ): Promise<{ id: number; status: statusType }> {
+    const task = await this.databaseService.taskc.findUnique({
+      where: { id: taskId },
+    });
+    if (!task) {
+      throw new NotFoundException(`Task with id ${taskId} not found`);
+    }
+    const updatedTask = await this.databaseService.taskc.update({
+      where: { id: taskId },
+      data: { status },
+      select: { id: true, status: true },
+    });
+    return updatedTask;
   }
 }

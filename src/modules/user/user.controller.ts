@@ -9,26 +9,29 @@ import {
   HttpException,
   HttpStatus,
   Put,
+  Req,
 } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import isValidEmailDomain from "src/utils/isvalidEmailDomain";
 import { UpdateUserDTO, UpdateUserDTOCredentials } from "./dto/update-user.dto";
-
+import { Request } from 'express'
 @Controller("user")
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  public async getAllUsers(@Query("page") page: string = "1", @Query("search") search: string = "none") {
+  public async getAllUsers(
+    @Query("page") page: string = "1",
+    @Query("search") search: string = "none"
+  ) {
     if (search == "none") {
       const data = await this.userService.getAll(Number(page));
       return data;
     } else {
-      const data = await this.userService.getAllPatter(Number(page) , search);
+      const data = await this.userService.getAllPatter(Number(page), search);
       return data;
     }
-    
   }
   @Get("/count")
   public async getCount() {
@@ -39,6 +42,11 @@ export class UserController {
   @Get("/:id")
   public async getUserByID(@Param("id") id: string) {
     const data = await this.userService.getById(id);
+    return data;
+  }
+  @Get("/name/names")
+  public async getAllnames() {
+    const data = await this.userService.getAllNames();
     return data;
   }
   @Delete("/:id")
@@ -70,7 +78,9 @@ export class UserController {
     };
   }
   @Put()
-  public async updateUser(@Body() user: UpdateUserDTO) {
+  public async updateUser(@Body() user: UpdateUserDTO, @Req() request: Request) {
+    const userId = request.user?.sub as number
+    user.id = userId
     const updated = await this.userService.update(user);
     if (!updated) {
       throw new HttpException(
@@ -89,6 +99,8 @@ export class UserController {
   ) {
     const resultUpdateCredentials =
       await this.userService.updateUserCredentialUseCase(UserCredentials);
+    
+      console.log(resultUpdateCredentials);
     if (resultUpdateCredentials.message == "updated") {
       return resultUpdateCredentials;
     } else {

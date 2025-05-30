@@ -21,6 +21,7 @@ export class NotificationService {
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
+        where : {owner : +id},
         orderBy: [{ read: "desc" }, { created: "desc" }],
       });
       await this.readAllNotification(Number(id))

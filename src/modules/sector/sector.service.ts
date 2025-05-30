@@ -20,6 +20,11 @@ export class SectorService {
           title: true,
           description: true,
           total: true,
+          _count: {
+            select: {
+              users : true
+            }
+          }
         },
       })) as ISector[];
       return Sectors;

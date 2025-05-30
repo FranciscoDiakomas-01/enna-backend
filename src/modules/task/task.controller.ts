@@ -9,11 +9,14 @@ import {
   HttpStatus,
   Query,
   Put,
+  Patch,
+  Req,
 } from "@nestjs/common";
 import { TaskService } from "./task.service";
 import { CreateTaskDto } from "./dto/create-task.dto";
 import { UpdateTaskDTO } from "./dto/update-task.dto";
 import { statusType } from "generated/prisma";
+import { UpdateTaskStatusDto } from "./dto/update-task-status.dto";
 
 @Controller("task")
 export class TaskController {
@@ -36,7 +39,7 @@ export class TaskController {
     if (search != "none") {
       const taskUser = await this.taskService.getAllPatterAdimin(
         Number(page),
-        search,
+        search
       );
       return taskUser;
     }
@@ -75,6 +78,18 @@ export class TaskController {
     return taskUser;
   }
 
+  @Get("/allbystatus/:status")
+  public async getByStatusAdmin(
+    @Query("page") page: string = "1",
+    @Param("status") status: statusType
+  ) {
+    const taskUser = await this.taskService.getAllByStatusAdmin(
+      Number(page),
+      status,
+    );
+    return taskUser;
+  }
+
   @Get(":id")
   public async getById(@Param("id") id: string) {
     const taskById = await this.taskService.getByid(+id);
@@ -105,5 +120,13 @@ export class TaskController {
     } else {
       throw new HttpException("tarefa eliminada com sucesso", HttpStatus.OK);
     }
+  }
+
+  @Patch("status")
+  async updateStatus(
+    @Body() updateTaskStatusDto: UpdateTaskStatusDto
+  ): Promise<{ id: number; status: statusType }> {
+    const { status, id } = updateTaskStatusDto;
+    return await this.taskService.updateStatus(id, status);
   }
 }

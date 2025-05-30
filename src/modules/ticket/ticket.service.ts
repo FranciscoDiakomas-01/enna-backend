@@ -1,4 +1,3 @@
-
 import { Injectable } from "@nestjs/common";
 import DatabaseService from "../database/database.service";
 import { ConfigService } from "@nestjs/config";
@@ -9,6 +8,7 @@ import { CreateTicketDto } from "./dto/create-ticket.dto";
 import { createNotification } from "src/utils/createNotification";
 import { CreateNotificationDto } from "../notification/dto/create-notification.dto";
 import DeepliksPath from "src/constants/frontend";
+
 
 @Injectable()
 export class TicketService {
@@ -26,6 +26,7 @@ export class TicketService {
           status: true,
           priority: true,
           title: true,
+          description : true
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
@@ -49,8 +50,14 @@ export class TicketService {
     }
   }
   public async getAllByStatus(page: number, status: statusType) {
-    const total = await this.count();
-    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    const total = await this.databaseservice.ticket.count({
+      where: {
+        status: {
+          equals: status,
+        },
+      },
+    });
+    const lastPage = Math.ceil(total / serverConstants.paginationLimit);
     try {
       const tickets = await this.databaseservice.ticket.findMany({
         select: {
@@ -58,6 +65,7 @@ export class TicketService {
           status: true,
           priority: true,
           title: true,
+          description: true,
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
@@ -70,7 +78,7 @@ export class TicketService {
       return {
         data: tickets,
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
@@ -78,15 +86,21 @@ export class TicketService {
       return {
         data: [],
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
     }
   }
   public async getAllByPriority(page: number, priority: priorityType) {
-    const total = await this.count();
-    const lastPage = Math.ceil(total.value / serverConstants.paginationLimit);
+    const total = await this.databaseservice.ticket.count({
+      where: {
+        priority: {
+          equals: priority,
+        },
+      },
+    });
+    const lastPage = Math.ceil(total/ serverConstants.paginationLimit);
     try {
       const tickets = await this.databaseservice.ticket.findMany({
         select: {
@@ -94,6 +108,7 @@ export class TicketService {
           status: true,
           priority: true,
           title: true,
+          description: true,
         },
         skip: (page - 1) * serverConstants.paginationLimit,
         take: serverConstants.paginationLimit,
@@ -106,7 +121,7 @@ export class TicketService {
       return {
         data: tickets,
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
@@ -114,7 +129,7 @@ export class TicketService {
       return {
         data: [],
         lastPage,
-        total: total.value,
+        total: total,
         limit: serverConstants.paginationLimit,
         page,
       };
@@ -318,7 +333,8 @@ export class TicketService {
         const lessBusyUsers = usersWithCount.filter(
           (u) => u.count === minCount
         );
-        const selectedUser = lessBusyUsers[Math.floor(Math.random() * lessBusyUsers.length)];
+        const selectedUser =
+          lessBusyUsers[Math.floor(Math.random() * lessBusyUsers.length)];
         const createdTask = await this.databaseservice.taskc.create({
           data: {
             title: taskTitle,

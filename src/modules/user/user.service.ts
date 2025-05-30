@@ -67,7 +67,7 @@ export class UserService {
           };
         })
       );
-  
+
       return {
         data: usersWithTaskCounts,
         lastPage,
@@ -82,6 +82,30 @@ export class UserService {
         total: total.value,
         limit: serverConstants.paginationLimit,
         page,
+      };
+    }
+  }
+  public async getAllNames() {
+    try {
+      const users = await this.databaseService.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          lastname: true,
+        },
+        orderBy: { created: "desc" },
+        where: {
+          type: {
+            not: "Admin",
+          },
+        },
+      });
+      return {
+        data: users,
+      };
+    } catch (error) {
+      return {
+        data: [],
       };
     }
   }
