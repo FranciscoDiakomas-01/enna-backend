@@ -239,7 +239,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:Innovator@01@localhost:5432/enna?schema=public"
+        "value": "postgresql://enna_owner:npg_wh0oRHmDjnv1@ep-silent-field-abctjmpt-pooler.eu-west-2.aws.neon.tech/enna?sslmode=require"
       }
     }
   },
