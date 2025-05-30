@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from "@nestjs/common";
 import { UserModule } from "./modules/user/user.module";
 import { TaskModule } from "./modules/task/task.module";
 import { TicketModule } from "./modules/ticket/ticket.module";
@@ -10,7 +15,8 @@ import { DashModule } from "./modules/dash/dash.module";
 import DatabaseModule from "./modules/database/database.module";
 import { JwtModule, JwtService } from "@nestjs/jwt";
 import { JwtMiddleware } from "./middleware/jwt.middleware";
-
+import AppController from "./app.controller";
+import AppService from "./app.service";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,7 +34,8 @@ import { JwtMiddleware } from "./middleware/jwt.middleware";
     AuthModule,
     DashModule,
   ],
-  providers: [],
+  providers: [AppService],
+  controllers : [AppController],
   exports: [],
 })
 export class AppModule implements NestModule {
@@ -38,7 +45,7 @@ export class AppModule implements NestModule {
       .apply(JwtMiddleware)
       .exclude(
         { path: "auth", method: RequestMethod.ALL },
-        { path: "auth/(.*)", method: RequestMethod.ALL } 
+        { path: "auth/(.*)", method: RequestMethod.ALL }
       )
       .forRoutes("*");
   }

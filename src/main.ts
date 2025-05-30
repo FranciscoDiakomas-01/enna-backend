@@ -8,6 +8,7 @@ import {
   ExpressAdapter,
   NestExpressApplication,
 } from "@nestjs/platform-express";
+import CancellAllTaskExpired from "./utils/cron.task";
 async function bootstrap() {
   const server = await NestFactory.create<NestExpressApplication>(
     AppModule,
@@ -47,7 +48,9 @@ async function bootstrap() {
     })
   );
   await server.listen(process.env.PORT ?? 3000);
-  const admin = await isertDefaultAdmin()
-  console.log(admin.message)
+  await isertDefaultAdmin()
+  setInterval(async () => {
+    await CancellAllTaskExpired()
+  }, 5 * 60 * 1000);
 }
 bootstrap();
